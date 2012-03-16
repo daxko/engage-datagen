@@ -200,6 +200,10 @@ describe "Generating document from defaults and specifics" do
       it "should output a document reflecting the specifics" do
         output[:foo].should == 'specific_value'
       end
+
+      it "should leave the defaults unchanged" do
+        registry.document_type(:person).defaults[:foo].should == 'default_value'
+      end
     end
   end
 
@@ -215,6 +219,10 @@ describe "Generating document from defaults and specifics" do
 
       it "should output a document reflecting the specifics" do
         output[:foo].should == 'specific_value'
+      end
+
+      it "should leave the defaults unchanged" do
+        registry.document_type(:person).defaults.has_key?(:foo).should be_false
       end
     end
 
@@ -258,6 +266,10 @@ describe "Generating document from defaults and specifics" do
           output[:name].should == 'Willy Wonka'
           output[:membership][:original_join_date].should == '2012-01-01'
           output[:membership][:history].should == []
+        end
+
+        it "should leave the defaults unchanged" do
+          registry.document_type(:member).defaults[:membership][:type].should == 'Individual'
         end
       end
     end

@@ -52,7 +52,9 @@ module EngageDatagen
       assert_valid_document_type document_type_name
       document_type = document_type document_type_name
 
-      data = document_type.defaults.deep_merge specifics
+      defaults = Hash.new
+      defaults.replace(document_type.defaults)
+      data = defaults.deep_merge specifics
 
       doc = Document.new document_type.next_id, data, document_type.metadata
       if block
