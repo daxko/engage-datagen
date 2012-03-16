@@ -43,7 +43,7 @@ module EngageDatagen
 end
 
 class Time
-  def as_json
+  def as_json(options=nil)
     strftime '%Y-%m-%dT%H:%M:%S.%7N'
   end
 end
