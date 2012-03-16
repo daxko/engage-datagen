@@ -25,3 +25,10 @@ describe "Raven client" do
     client.store(EngageDatagen::Dataset[:ds_name])
   end
 end
+
+describe "Date serialization" do
+  it "should be raven friendly" do
+    date = Time.local(1999,1,1)
+    date.as_json.should == "1999-01-01T00:00:00.0000000"
+  end
+end
