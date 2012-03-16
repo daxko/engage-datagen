@@ -52,13 +52,7 @@ module EngageDatagen
       assert_valid_document_type document_type_name
       document_type = document_type document_type_name
 
-      data = document_type.defaults.merge specifics do |key,old,new|
-        if old.respond_to?(:merge) and new.respond_to?(:merge)
-          old.merge(new)
-        else
-          new
-        end
-      end
+      data = document_type.defaults.deep_merge specifics
 
       doc = Document.new document_type.next_id, data, document_type.metadata
       if block
