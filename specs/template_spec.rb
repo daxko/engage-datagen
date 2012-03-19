@@ -172,11 +172,6 @@ describe "Generating document from defaults and specifics" do
     registry.add_document_type :person
   end
 
-  it "should output the composed doc" do
-    output = dataset.build_person
-    output.should_not be_nil
-  end
-
   describe "Given defaults for a field" do
     before(:each) do
       registry.document_type(:person).defaults[:foo] = 'default_value'

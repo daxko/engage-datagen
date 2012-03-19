@@ -52,7 +52,8 @@ module EngageDatagen
       assert_valid_document_type document_type_name
       document_type = document_type document_type_name
 
-      data = document_type.defaults.rmerge(specifics)
+      defaults = Hash.new.replace(document_type.defaults)
+      data = defaults.rmerge(specifics)
 
       doc = Document.new document_type.next_id, data, document_type.metadata
       if block
@@ -120,9 +121,28 @@ end
 class Hash
   # adapted from https://gist.github.com/6391
   def rmerge(other_hash)
-      r = {}
-      merge(other_hash) do |key, oldval, newval|
-        r[key] = oldval.is_a?(Hash) ? oldval.rmerge(newval) : newval
+    r = {}
+    r.rmerge_internal self
+    r.rmerge_internal other_hash
+    r
+  end
+
+  protected
+
+  def rmerge_internal(other_hash)
+    other_hash.keys.each do |key|
+      if other_hash[key].is_a? Hash
+        if has_key? key and self[key].is_a? Hash
+          self[key] = self[key].rmerge other_hash[key]
+        else
+          self[key] = Hash.new.replace(other_hash[key])
+        end
+      elsif other_hash[key].is_a? Array
+        self[key] = other_hash[key].dup
+      else
+        self[key] = other_hash[key]
       end
     end
+    self
+  end
 end
