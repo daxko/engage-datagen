@@ -35,6 +35,10 @@ module EngageDatagen
       def status value
         @doc[:Membership][:UnitStatus] = value
       end
+
+      def branch value
+        @doc[:Membership][:Branch] = value
+      end
       
       private
         def history_defaults
@@ -64,7 +68,7 @@ module EngageDatagen
       defaults: {
         Membership: {
           ClientID: 0,
-          Branch: "Local Family YMCA",
+          Branch: "",
           MemUnitID: 2828522,
           MemberUnitID: "300140564",
           UnitStatus: "Active",
