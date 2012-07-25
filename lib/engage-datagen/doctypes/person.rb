@@ -81,6 +81,7 @@ module EngageDatagen
         Gender: "M",
         Race: "B",
         DateOfBirth: "1962-02-04T00:00:00.0000000",
+        MaritalStatus,
         Membership: {
           Branch: "Local Family YMCA",
           MemID: 82667,
@@ -91,9 +92,12 @@ module EngageDatagen
           MemberType: "Adult",
           Active: true,
           JoinDate: "2006-02-08T00:00:00.0000000",
+          MostRecentJoinDate: null,
+          TerminationDate: null,
           JoinReason: "",
           AllowEmail: true,
-          RecognitionFlags: [:Reciprocity]
+          RecognitionFlags: [:Reciprocity],
+          IsPrimaryMember: false
         },
         OperationsId: 82667,
         Unit: "",

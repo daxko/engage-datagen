@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'engage-datagen'
-  s.version     = '0.0.5'
+  s.version     = '0.0.6'
   s.date        = '2012-07-16'
   s.summary     = "Utility for generating known datasets in the Engage app"
   s.description = "Helps with automated testing"
